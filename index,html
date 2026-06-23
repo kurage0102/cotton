@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>こっとんるーむ☁ 500人ありがとう</title>
+
+<style>
+body{
+  margin:0;
+  height:100vh;
+  overflow:hidden;
+  font-family: "Arial", sans-serif;
+  background: linear-gradient(to top, #a8edea, #fed6e3);
+  color:#444;
+}
+
+/* ふわふわ雲 */
+.cloud{
+  position:absolute;
+  font-size:30px;
+  opacity:0.6;
+  animation:move 25s linear infinite;
+}
+.c1{top:10%; left:-100px;}
+.c2{top:30%; animation-duration:35s;}
+.c3{top:60%; animation-duration:28s;}
+
+@keyframes move{
+  from{transform:translateX(-200px);}
+  to{transform:translateX(120vw);}
+}
+
+/* メイン */
+#title{
+  position:absolute;
+  width:100%;
+  text-align:center;
+  top:35%;
+}
+
+h1{
+  font-size:26px;
+  letter-spacing:2px;
+}
+
+p{
+  font-size:14px;
+  opacity:0.8;
+}
+
+button{
+  margin-top:15px;
+  padding:12px 22px;
+  border:none;
+  border-radius:25px;
+  background:white;
+  box-shadow:0 5px 15px rgba(0,0,0,0.1);
+}
+
+/* ストーリー */
+#story{
+  position:absolute;
+  width:100%;
+  top:40%;
+  text-align:center;
+  font-size:18px;
+  display:none;
+  animation:fade 1s ease;
+}
+
+@keyframes fade{
+  from{opacity:0; transform:translateY(10px);}
+  to{opacity:1; transform:translateY(0);}
+}
+
+/* 最後 */
+#final{
+  position:absolute;
+  width:100%;
+  top:40%;
+  text-align:center;
+  font-size:22px;
+  color:#ff6fa5;
+  display:none;
+  animation:pop 1s ease;
+}
+
+@keyframes pop{
+  0%{transform:scale(0.5); opacity:0;}
+  100%{transform:scale(1); opacity:1;}
+}
+
+/* キラキラ */
+.spark{
+  position:absolute;
+  width:6px;
+  height:6px;
+  background:white;
+  border-radius:50%;
+  animation:blink 2s infinite;
+}
+
+@keyframes blink{
+  0%{opacity:0;}
+  50%{opacity:1;}
+  100%{opacity:0;}
+}
+</style>
+</head>
+
+<body>
+
+<!-- 雲 -->
+<div class="cloud c1">☁️</div>
+<div class="cloud c2">☁️</div>
+<div class="cloud c3">☁️</div>
+
+<!-- タイトル -->
+<div id="title">
+<h1>☁ こっとんるーむ☁</h1>
+<p>500人ありがとう</p>
+<button onclick="start()">▶ 旅をはじめる</button>
+</div>
+
+<!-- ストーリー -->
+<div id="story"></div>
+
+<!-- 最後 -->
+<div id="final">
+🎆 500人、本当にありがとう 🎆<br>
+これからも一緒に歩もう
+</div>
+
+<script>
+
+const msgs=[
+"小さなサーバーから始まりました。",
+"最初は数人だけの場所でした。",
+"でも少しずつ人が増えて。",
+"毎日笑いが生まれて。",
+"気づけば500人へ──"
+];
+
+let i=0;
+
+function start(){
+  document.getElementById("title").style.display="none";
+  document.getElementById("story").style.display="block";
+
+  let box=document.getElementById("story");
+
+  let t=setInterval(()=>{
+    box.innerText=msgs[i];
+    i++;
+
+    if(i>=msgs.length){
+      clearInterval(t);
+      box.style.display="none";
+      document.getElementById("final").style.display="block";
+    }
+  },2300);
+}
+
+/* キラキラ生成 */
+for(let i=0;i<40;i++){
+  let s=document.createElement("div");
+  s.className="spark";
+  s.style.left=Math.random()*100+"%";
+  s.style.top=Math.random()*100+"%";
+  s.style.animationDelay=Math.random()*2+"s";
+  document.body.appendChild(s);
+}
+
+</script>
+
+</body>
+</html>
